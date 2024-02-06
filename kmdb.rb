@@ -73,14 +73,14 @@
     Actor.destroy_all
 
 # Generate models and tables, according to the domain model.
-t.string "title"
-t.string "studio"
-t.integar "year_released"
-t.string "ratings"
+# t.string "title"
+# t.string "studio"
+# t.integar "year_released"
+# t.string "ratings"
 
-t.integar "movie_id"
-t.string "actor_name"
-t.string "character_name"
+# t.integar "movie_id"
+# t.string "actor_name"
+# t.string "character_name"
 
 # Insert data into the database that reflects the sample data shown above.
 # Do not use hard-coded foreign key IDs.
@@ -205,7 +205,13 @@ puts ""
 
 # Query the movies data and loop through the results to display the movies output.
 all_movies = Movie.all
-puts all_movies.inspect
+for info in all_movies
+    title = info["title"]
+    studio = info["studio"]
+    year = info["year_released"]
+    ratings = info["ratings"]
+    puts "#{title.ljust(25)} #{studio.ljust(25)} #{year.to_s.ljust(25)} #{ratings.ljust(25)}"
+end
 
 # Prints a header for the cast output
 puts ""
@@ -219,7 +225,7 @@ batman1 = Actor.where({ "movie_id" => series_1["id"] })
 for info in batman1
     actor = info["actor_name"]
     character = info["character_name"]
-    puts "#{movie_1["title"]} #{first_name} #{last_name}"
+    puts "#{movie_1["title"].ljust(25)} #{actor.ljust(25)} #{character.ljust(25)}"
 end
 
 batman2 = Actor.where({ "movie_id" => series_2["id"] })
@@ -227,7 +233,7 @@ batman2 = Actor.where({ "movie_id" => series_2["id"] })
 for info in batman2
     actor = info["actor_name"]
     character = info["character_name"]
-    puts "#{movie_2["title"]} #{first_name} #{last_name}"
+    puts "#{movie_2["title"].ljust(25)} #{actor.ljust(25)} #{character.ljust(25)}"
 end
 
 batman3 = Actor.where({ "movie_id" => series_3["id"] })
@@ -235,5 +241,5 @@ batman3 = Actor.where({ "movie_id" => series_3["id"] })
 for info in batman3
     actor = info["actor_name"]
     character = info["character_name"]
-    puts "#{movie_3["title"]} #{first_name} #{last_name}"
+    puts "#{movie_3["title"].ljust(25)} #{actor.ljust(25)} #{character.ljust(25)}"
 end
